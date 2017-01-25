@@ -24,11 +24,8 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура вы победили!', 120, 30);
   ctx.fillText('Список результатов:', 120, 50);
   
-  
-   
   var max = times[0];
-  
-  for (var i = 0; i < times.length; i++) {
+    for (var i = 0; i < times.length; i++) {
     if(times[i] > max) {
       max = times[i];
     }
@@ -38,11 +35,12 @@ window.renderStatistics = function (ctx, names, times) {
   var histoX = 140;
   var columnWidth = 90;
   var widthRect = 40;
-  var heightInPx = 150;
-  
+    
   for (var i = 0; i < times.length; i++) {
     var name = names[i];
     var time = times[i];
+    var heightInPx = times[i] * 150 / max;
+    var beginRect = histoX + i * columnWidth;
       
     if (name === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
@@ -50,24 +48,17 @@ window.renderStatistics = function (ctx, names, times) {
     else {
       ctx.fillStyle = ['rgba(0, 0,', ((Math.random() * 5) * 50).toFixed(0), ',' , (Math.random()).toFixed(1), ')' ].join('');
     }
-    
-    if(times[i] === max) {
-        heightInPx = 150;
-    }
-    else {
-        heightInPx = times[i] * 150 / max;
-    }
-    
-    ctx.fillRect(histoX + i * columnWidth, histoY, 40, -heightInPx );
+      
+    ctx.fillRect(beginRect, histoY, 40, -heightInPx );
     ctx.fillStyle = '#000';
     ctx.font = '16px PT Mono';
     ctx.textBaseline = 'hanging';
-    ctx.fillText(name, histoX + i * columnWidth, histoY + 10 );
+    ctx.fillText(name, beginRect, histoY + 10 );
     
     ctx.fillStyle = '#000';
     ctx.font = '16px PT Mono';
     ctx.textBaseline = 'hanging';
-    ctx.fillText(Math.round(time), histoX + i * columnWidth, histoY - heightInPx - 20);
+    ctx.fillText(Math.round(time), beginRect, histoY - heightInPx - 20);
    
   }
   
