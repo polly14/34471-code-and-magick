@@ -23,8 +23,17 @@ window.renderStatistics = function (ctx, names, times) {
 
   ctx.fillText('Ура вы победили!', 120, 30);
   ctx.fillText('Список результатов:', 120, 50);
+  
+  
    
-  var max = times[0];       
+  var max = times[0];
+  
+  for (var i = 0; i < times.length; i++) {
+    if(times[i] > max) {
+      max = times[i];
+    }
+  }
+    
   var histoY = 250;
   var histoX = 140;
   var columnWidth = 90;
@@ -34,11 +43,7 @@ window.renderStatistics = function (ctx, names, times) {
   for (var i = 0; i < times.length; i++) {
     var name = names[i];
     var time = times[i];
-        
-    if(times[i] > max) {
-      max = times[i];
-    }
-    
+      
     if (name === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     }
