@@ -23,57 +23,51 @@ window.renderStatistics = function (ctx, names, times) {
 
   ctx.fillText('Ура вы победили!', 120, 30);
   ctx.fillText('Список результатов:', 120, 50);
-  
-  var max = times[0];    
-  for(var i = 0; i < times.length; i++) {
-    if(times[i] > max) {
-      max = times[i];
-    }
-  }    
-    
-  var heightInPx = 150;
-    for(var i = 0; i < times.length; i++) {
-      if(times[i] === max) {
-        return 150;
-      }
-      else {
-        return (100 * times[i] / max) * 150 / 100;
-      }
-    }
-    
+   
+  var max = times[0];       
   var histoY = 250;
   var histoX = 140;
   var columnWidth = 90;
   var widthRect = 40;
   var beginRect;
   var colorRect;
+  var heightInPx = 150;
   
   for (var i = 0; i < times.length; i++) {
     var name = names[i];
     var time = times[i];
+        
+    if(times[i] > max) {
+      max = times[i];
+    }
     
-    ctx.fillStyle = '#000';
-    ctx.font = '16px PT Mono';
-    ctx.textBaseline = 'hanging';
-    ctx.fillText(Math.round(time), histoX + i * columnWidth, histoY - heightInPx - 10);
-    
-    if (name === 'Я') {
+    if (name === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     }
     else {
       ctx.fillStyle = ['rgba(0, 0,', ((Math.random() * 5) * 50).toFixed(0), ',' , (Math.random()).toFixed(1), ')' ].join('');
     }
     
-    ctx.fillRect(histoX + i * columnWidth, histoY, 40, histoY - heightInPx );
+    if(times[i] === max) {
+        heightInPx = 150;
+    }
+    else {
+        heightInPx = times[i] * 150 / max;
+    }
+    
+    ctx.fillRect(histoX + i * columnWidth, histoY, 40, -heightInPx );
     ctx.fillStyle = '#000';
     ctx.font = '16px PT Mono';
     ctx.textBaseline = 'hanging';
-    ctx.fillText(name, histoX + i * columnWidth, histoY + 10);
+    ctx.fillText(name, histoX + i * columnWidth, histoY + 10 );
     
+    ctx.fillStyle = '#000';
+    ctx.font = '16px PT Mono';
+    ctx.textBaseline = 'hanging';
+    ctx.fillText(Math.round(time), histoX + i * columnWidth, histoY - heightInPx - 20);
+   
   }
-  
   
 };
 
 var canvas = document.querySelector('canvas');
-renderStatistics(canvas.getContext('2d'), ['Иван', 'Сергей', 'Я'], [20.32, 40.11, 30.18]);
