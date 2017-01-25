@@ -29,8 +29,6 @@ window.renderStatistics = function (ctx, names, times) {
   var histoX = 140;
   var columnWidth = 90;
   var widthRect = 40;
-  var beginRect;
-  var colorRect;
   var heightInPx = 150;
   
   for (var i = 0; i < times.length; i++) {
