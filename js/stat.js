@@ -1,5 +1,31 @@
 'use strict';
 
+function max(myArray) {
+  var max = myArray[0];
+  for (var i = 0; i < myArray.length; i++) {
+    if(myArray[i] > max) {
+      max = myArray[i];
+    }    
+  }
+  return max;
+}
+
+function drawRect(myArray, histoY, histoX, columnWidth, widthRect, histoHeight) {
+  var maxValue = max(myArray);
+  for (var i = 0; i < myArray.length; i++) {    
+    var heightInPx = myArray[i] * histoHeight / maxValue;
+    var beginRect = histoX + i * columnWidth;      
+    if (name === 'Вы') {
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+    }
+    else {
+      ctx.fillStyle = ['rgba(0, 0,', ((Math.random() * 5) * 50).toFixed(0), ',' , (Math.random()).toFixed(1), ')' ].join('');
+    }      
+    ctx.fillRect(beginRect, histoY, widthRect, -heightInPx );   
+  }
+}
+
+
 window.renderStatistics = function (ctx, names, times) {
   
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
@@ -20,48 +46,22 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillStyle = '#000';
   ctx.font = '16px PT Mono';
   ctx.textBaseline = 'hanging';
-
   ctx.fillText('Ура вы победили!', 120, 30);
-  ctx.fillText('Список результатов:', 120, 50);
+  ctx.fillText('Список результатов:', 120, 50); 
   
-  var max = times[0];
-    for (var i = 0; i < times.length; i++) {
-    if(times[i] > max) {
-      max = times[i];
-    }
-  }
-    
-  var histoY = 250;
-  var histoX = 140;
-  var columnWidth = 90;
-  var widthRect = 40;
-    
+  
+drawRect(times, 250, 140, 90, 40, 150);
+     
   for (var i = 0; i < times.length; i++) {
     var name = names[i];
     var time = times[i];
-    var heightInPx = times[i] * 150 / max;
-    var beginRect = histoX + i * columnWidth;
-      
-    if (name === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-    }
-    else {
-      ctx.fillStyle = ['rgba(0, 0,', ((Math.random() * 5) * 50).toFixed(0), ',' , (Math.random()).toFixed(1), ')' ].join('');
-    }
-      
-    ctx.fillRect(beginRect, histoY, 40, -heightInPx );
+   
     ctx.fillStyle = '#000';
     ctx.font = '16px PT Mono';
     ctx.textBaseline = 'hanging';
     ctx.fillText(name, beginRect, histoY + 10 );
-    
-    ctx.fillStyle = '#000';
-    ctx.font = '16px PT Mono';
-    ctx.textBaseline = 'hanging';
     ctx.fillText(Math.round(time), beginRect, histoY - heightInPx - 20);
    
   }
   
 };
-
-var canvas = document.querySelector('canvas');
