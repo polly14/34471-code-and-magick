@@ -10,7 +10,7 @@ function max(myArray) {
   return max;
 }
 
-function drawRect(myArray, histoY, histoX, columnWidth, widthRect, histoHeight) {
+function drawRect(ctx, myArray, myArray2, histoY, histoX, columnWidth, widthRect, histoHeight) {
   var maxValue = max(myArray);
   for (var i = 0; i < myArray.length; i++) {    
     var heightInPx = myArray[i] * histoHeight / maxValue;
@@ -21,7 +21,19 @@ function drawRect(myArray, histoY, histoX, columnWidth, widthRect, histoHeight) 
     else {
       ctx.fillStyle = ['rgba(0, 0,', ((Math.random() * 5) * 50).toFixed(0), ',' , (Math.random()).toFixed(1), ')' ].join('');
     }      
-    ctx.fillRect(beginRect, histoY, widthRect, -heightInPx );   
+    ctx.fillRect(beginRect, histoY, widthRect, -heightInPx );
+    
+    
+    var name = myArray2[i];
+    var time = myArray[i];
+   
+    ctx.fillStyle = '#000';
+    ctx.font = '16px PT Mono';
+    ctx.textBaseline = 'hanging';
+    ctx.fillText(name, beginRect, histoY + 10 );
+    ctx.fillText(Math.round(time), beginRect, histoY - heightInPx - 20);
+    
+    
   }
 }
 
@@ -50,18 +62,8 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Список результатов:', 120, 50); 
   
   
-drawRect(times, 250, 140, 90, 40, 150);
+drawRect(ctx, times, names, 250, 140, 90, 40, 150);
      
-  for (var i = 0; i < times.length; i++) {
-    var name = names[i];
-    var time = times[i];
-   
-    ctx.fillStyle = '#000';
-    ctx.font = '16px PT Mono';
-    ctx.textBaseline = 'hanging';
-    ctx.fillText(name, beginRect, histoY + 10 );
-    ctx.fillText(Math.round(time), beginRect, histoY - heightInPx - 20);
-   
-  }
+  
   
 };
