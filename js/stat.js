@@ -14,7 +14,11 @@ function drawRect(ctx, myArray, myArray2, histoY, histoX, columnWidth, widthRect
   var maxValue = max(myArray);
   for (var i = 0; i < myArray.length; i++) {    
     var heightInPx = myArray[i] * histoHeight / maxValue;
-    var beginRect = histoX + i * columnWidth;      
+    var beginRect = histoX + i * columnWidth;
+    
+    var name = myArray2[i];
+    var time = myArray[i];
+    
     if (name === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     }
@@ -23,20 +27,14 @@ function drawRect(ctx, myArray, myArray2, histoY, histoX, columnWidth, widthRect
     }      
     ctx.fillRect(beginRect, histoY, widthRect, -heightInPx );
     
-    
-    var name = myArray2[i];
-    var time = myArray[i];
-   
     ctx.fillStyle = '#000';
     ctx.font = '16px PT Mono';
     ctx.textBaseline = 'hanging';
     ctx.fillText(name, beginRect, histoY + 10 );
     ctx.fillText(Math.round(time), beginRect, histoY - heightInPx - 20);
     
-    
   }
 }
-
 
 window.renderStatistics = function (ctx, names, times) {
   
@@ -61,9 +59,6 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура вы победили!', 120, 30);
   ctx.fillText('Список результатов:', 120, 50); 
   
-  
 drawRect(ctx, times, names, 250, 140, 90, 40, 150);
-     
-  
-  
+   
 };
