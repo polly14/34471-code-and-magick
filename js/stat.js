@@ -1,23 +1,23 @@
 'use strict';
 
-function max(myArray) {
-  var max = myArray[0];
-  for (var i = 0; i < myArray.length; i++) {
-    if(myArray[i] > max) {
-      max = myArray[i];
+function max(timeArray) {
+  var max = timeArray[0];
+  for (var i = 0; i < timeArray.length; i++) {
+    if(timeArray[i] > max) {
+      max = timeArray[i];
     }    
   }
   return max;
 }
 
-function drawRect(ctx, myArray, myArray2, histoY, histoX, columnWidth, widthRect, histoHeight) {
-  var maxValue = max(myArray);
-  for (var i = 0; i < myArray.length; i++) {    
-    var heightInPx = myArray[i] * histoHeight / maxValue;
+function drawRect(ctx, timeArray, nameArray, histoY, histoX, columnWidth, widthRect, histoHeight) {
+  var maxValue = max(timeArray);
+  for (var i = 0; i < timeArray.length; i++) {    
+    var heightInPx = timeArray[i] * histoHeight / maxValue;
     var beginRect = histoX + i * columnWidth;
     
-    var name = myArray2[i];
-    var time = myArray[i];
+    var name = nameArray[i];
+    var time = timeArray[i];
     
     if (name === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
