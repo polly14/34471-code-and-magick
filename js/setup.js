@@ -3,10 +3,13 @@
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
+var setupSubmit = setup.querySelector('.setup-submit');
 var wizardCoat = document.querySelector('#wizard-coat');
 var wizardEyes = document.querySelector('#wizard-eyes');
 var setupFireballWrap = document.querySelector('.setup-fireball-wrap');
 var getColorIndex = -1;
+var ENTER_KEY_CODE = 13;
+var ESCAPE_KEY_CODE = 27;
 
 var wizardCoatColors = [
   'rgb(101, 137, 164)',
@@ -31,14 +34,6 @@ var setupFireballWrapColor = [
   '#e6e848'
 ];
 
-setupOpen.addEventListener('click', function () {
-  setup.classList.remove('invisible');
-});
-
-setupClose.addEventListener('click', function () {
-  setup.classList.add('invisible');
-});
-
 wizardCoat.addEventListener('click', function () {
   var colorIndexCoat = Math.floor(Math.random() * wizardCoatColors.length);
   wizardCoat.style.fill = wizardCoatColors[colorIndexCoat];
@@ -60,3 +55,54 @@ function colorIndex(array) {
   }
   return getColorIndex;
 }
+
+var isActivateEvent = function (evt) {
+  return evt.keyCode && evt.keyCode === ENTER_KEY_CODE;
+};
+
+var setupKeydownHandler = function (evt) {
+  if (evt.keyCode === ESCAPE_KEY_CODE) {
+    setup.classList.add('invisible');
+  }
+};
+
+var showSetupElement = function () {
+  setup.classList.remove('invisible');
+  document.addEventListener('keydown', setupKeydownHandler);
+};
+
+var hideSetupElement = function () {
+  setup.classList.add('invisible');
+  document.removeEventListener('keydown', setupKeydownHandler);
+};
+
+setupOpen.addEventListener('click', function () {
+  showSetupElement();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (isActivateEvent(evt)) {
+    showSetupElement();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  hideSetupElement();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (isActivateEvent(evt)) {
+    hideSetupElement();
+  }
+});
+
+setupSubmit.addEventListener('click', function () {
+  hideSetupElement();
+});
+
+setupSubmit.addEventListener('keydown', function (evt) {
+  if (isActivateEvent(evt)) {
+    hideSetupElement();
+  }
+});
+
