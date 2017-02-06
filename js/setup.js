@@ -56,11 +56,11 @@ function colorIndex(array) {
   return getColorIndex;
 }
 
-var isActivateEvent = function (evt) {
+var isEnter = function (evt) {
   return evt.keyCode && evt.keyCode === ENTER_KEY_CODE;
 };
 
-var setupKeydownHandler = function (evt) {
+var onSetupKeydown = function (evt) {
   if (evt.keyCode === ESCAPE_KEY_CODE) {
     setup.classList.add('invisible');
   }
@@ -68,12 +68,16 @@ var setupKeydownHandler = function (evt) {
 
 var showSetupElement = function () {
   setup.classList.remove('invisible');
-  document.addEventListener('keydown', setupKeydownHandler);
+  document.addEventListener('keydown', onSetupKeydown);
+  setupOpen.setAttribute('aria-pressed', 'true');
+  setup.setAttribute('aria-hidden', 'false');
 };
 
 var hideSetupElement = function () {
   setup.classList.add('invisible');
-  document.removeEventListener('keydown', setupKeydownHandler);
+  document.removeEventListener('keydown', onSetupKeydown);
+  setupOpen.setAttribute('aria-pressed', 'false');
+  setup.setAttribute('aria-hidden', 'true');
 };
 
 setupOpen.addEventListener('click', function () {
@@ -81,7 +85,7 @@ setupOpen.addEventListener('click', function () {
 });
 
 setupOpen.addEventListener('keydown', function (evt) {
-  if (isActivateEvent(evt)) {
+  if (isEnter(evt)) {
     showSetupElement();
   }
 });
@@ -91,17 +95,19 @@ setupClose.addEventListener('click', function () {
 });
 
 setupClose.addEventListener('keydown', function (evt) {
-  if (isActivateEvent(evt)) {
+  if (isEnter(evt)) {
     hideSetupElement();
   }
 });
 
-setupSubmit.addEventListener('click', function () {
-  hideSetupElement();
+setupSubmit.addEventListener('click', function (evt) {
+  evt.preventDefault();
 });
 
+setupSubmit.addEventListener('click', hideSetupElement);
+
 setupSubmit.addEventListener('keydown', function (evt) {
-  if (isActivateEvent(evt)) {
+  if (isEnter(evt)) {
     hideSetupElement();
   }
 });
