@@ -7,6 +7,7 @@ var setupSubmit = setup.querySelector('.setup-submit');
 var wizardCoat = document.querySelector('#wizard-coat');
 var wizardEyes = document.querySelector('#wizard-eyes');
 var setupFireballWrap = document.querySelector('.setup-fireball-wrap');
+var setupWizardForm = setup.querySelector('.setup-wizard-form');
 var getColorIndex = -1;
 var ENTER_KEY_CODE = 13;
 var ESCAPE_KEY_CODE = 27;
@@ -100,7 +101,7 @@ setupClose.addEventListener('keydown', function (evt) {
   }
 });
 
-setupSubmit.addEventListener('click', function (evt) {
+setupWizardForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
 });
 
@@ -111,4 +112,3 @@ setupSubmit.addEventListener('keydown', function (evt) {
     hideSetupElement();
   }
 });
-
