@@ -5,11 +5,11 @@ var getRandomElement = function (array) {
   return array[randomElementIndex];
 };
 
-window.getRandomElementExcept = function (array, oneElement) {
-  var twoElement;
-  while (!twoElement || twoElement === oneElement) {
-    twoElement = getRandomElement(array);
+window.getRandomElementExcept = function (array, firstElement) {
+  var secondElement;
+  while (!secondElement || secondElement === firstElement) {
+    secondElement = getRandomElement(array);
   }
-  return twoElement;
+  return secondElement;
 };
 
