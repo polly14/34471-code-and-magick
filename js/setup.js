@@ -64,7 +64,7 @@ setupOpen.addEventListener('click', function () {
 });
 
 setupOpen.addEventListener('keydown', function (evt) {
-  if (window.isEnter(evt)) {
+  if (window.utils.isEnter(evt)) {
     showSetupElement();
   }
 });
@@ -74,7 +74,7 @@ setupClose.addEventListener('click', function () {
 });
 
 setupClose.addEventListener('keydown', function (evt) {
-  if (window.isEnter(evt)) {
+  if (window.utils.isEnter(evt)) {
     hideSetupElement();
   }
 });
@@ -86,7 +86,7 @@ setupWizardForm.addEventListener('submit', function (evt) {
 setupSubmit.addEventListener('click', hideSetupElement);
 
 setupSubmit.addEventListener('keydown', function (evt) {
-  if (window.isEnter(evt)) {
+  if (window.utils.isEnter(evt)) {
     hideSetupElement();
   }
 });
