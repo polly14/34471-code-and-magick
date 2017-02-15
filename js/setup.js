@@ -30,17 +30,14 @@
   ];
 
   window.colorizeElement(wizardCoat, wizardCoatColors, function (element, currentColor) {
-    element = wizardCoat;
     element.style.fill = currentColor;
   });
 
   window.colorizeElement(wizardEyes, wizardEyesColors, function (element, currentColor) {
-    element = wizardEyes;
     element.style.fill = currentColor;
   });
 
   window.colorizeElement(setupFireballWrap, setupFireballWrapColor, function (element, currentColor) {
-    element = setupFireballWrap;
     element.style.background = currentColor;
   });
 
