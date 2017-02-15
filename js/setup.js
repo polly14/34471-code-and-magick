@@ -1,92 +1,125 @@
 'use strict';
 
-var setup = document.querySelector('.setup');
-var setupOpen = document.querySelector('.setup-open');
-var setupClose = setup.querySelector('.setup-close');
-var setupSubmit = setup.querySelector('.setup-submit');
-var wizardCoat = document.querySelector('#wizard-coat');
-var wizardEyes = document.querySelector('#wizard-eyes');
-var setupFireballWrap = document.querySelector('.setup-fireball-wrap');
-var setupWizardForm = setup.querySelector('.setup-wizard-form');
-var ESCAPE_KEY_CODE = 27;
+(function () {
 
-var wizardCoatColors = [
-  'rgb(101, 137, 164)',
-  'rgb(241, 43, 107)',
-  'rgb(146, 100, 161)',
-  'rgb(56, 159, 117)',
-  'rgb(215, 210, 55)',
-  'rgb(0, 0, 0)'
-];
-var wizardEyesColors = [
-  'black',
-  'red',
-  'blue',
-  'yellow',
-  'green'
-];
-var setupFireballWrapColor = [
-  '#ee4830',
-  '#30a8ee',
-  '#5ce6c0',
-  '#e848d5',
-  '#e6e848'
-];
+  var wizardCoat = document.querySelector('#wizard-coat');
+  var wizardEyes = document.querySelector('#wizard-eyes');
+  var setupFireballWrap = document.querySelector('.setup-fireball-wrap');
 
-window.colorizeElement(wizardCoat, wizardCoatColors, 'fill');
+  var wizardCoatColors = [
+    'rgb(101, 137, 164)',
+    'rgb(241, 43, 107)',
+    'rgb(146, 100, 161)',
+    'rgb(56, 159, 117)',
+    'rgb(215, 210, 55)',
+    'rgb(0, 0, 0)'
+  ];
+  var wizardEyesColors = [
+    'black',
+    'red',
+    'blue',
+    'yellow',
+    'green'
+  ];
+  var setupFireballWrapColor = [
+    '#ee4830',
+    '#30a8ee',
+    '#5ce6c0',
+    '#e848d5',
+    '#e6e848'
+  ];
 
-window.colorizeElement(wizardEyes, wizardEyesColors, 'fill');
+  window.colorizeElement(wizardCoat, wizardCoatColors, function (element, currentColor) {
+    element.style.fill = currentColor;
+  });
 
-window.colorizeElement(setupFireballWrap, setupFireballWrapColor, 'background');
+  window.colorizeElement(wizardEyes, wizardEyesColors, function (element, currentColor) {
+    element.style.fill = currentColor;
+  });
 
-var onSetupKeydown = function (evt) {
-  if (evt.keyCode === ESCAPE_KEY_CODE) {
+  window.colorizeElement(setupFireballWrap, setupFireballWrapColor, function (element, currentColor) {
+    element.style.background = currentColor;
+  });
+
+})();
+
+window.enableSetup = (function () {
+  var setup = document.querySelector('.setup');
+  var setupOpen = document.querySelector('.setup-open');
+  var setupClose = setup.querySelector('.setup-close');
+  var setupSubmit = document.querySelector('.setup-submit');
+  var setupWizardForm = document.querySelector('.setup-wizard-form');
+  var onSetupKeydown = function (evt) {
+    if (window.utils.isEscape(evt)) {
+      setup.classList.add('invisible');
+    }
+  };
+  var onSetupClose = null;
+
+  var showSetupElement = function () {
+    setup.classList.remove('invisible');
+    document.addEventListener('keydown', onSetupKeydown);
+    setupOpen.setAttribute('aria-pressed', 'true');
+    setup.setAttribute('aria-hidden', 'false');
+  };
+
+  var hideSetupElement = function () {
     setup.classList.add('invisible');
-  }
-};
+    document.removeEventListener('keydown', onSetupKeydown);
+    setupOpen.setAttribute('aria-pressed', 'false');
+    setup.setAttribute('aria-hidden', 'true');
+    setupClose.removeEventListener('keydown', onKeyDown);
+    setupClose.removeEventListener('click', onClick);
+    setupSubmit.removeEventListener('click', onClick);
+    setupSubmit.removeEventListener('keydown', onKeyDown);
 
-var showSetupElement = function () {
-  setup.classList.remove('invisible');
-  document.addEventListener('keydown', onSetupKeydown);
-  setupOpen.setAttribute('aria-pressed', 'true');
-  setup.setAttribute('aria-hidden', 'false');
-};
+    if (typeof onSetupClose === 'function') {
+      onSetupClose();
+    }
+  };
 
-var hideSetupElement = function () {
-  setup.classList.add('invisible');
-  document.removeEventListener('keydown', onSetupKeydown);
-  setupOpen.setAttribute('aria-pressed', 'false');
-  setup.setAttribute('aria-hidden', 'true');
-};
+  var onClick = function () {
+    hideSetupElement();
+  };
 
-setupOpen.addEventListener('click', function () {
-  showSetupElement();
-});
+  var onKeyDown = function (evt) {
+    if (window.utils.isEnter(evt)) {
+      hideSetupElement();
+    }
+  };
 
-setupOpen.addEventListener('keydown', function (evt) {
-  if (window.utils.isEnter(evt)) {
+  setupWizardForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+  });
+
+  return function (cb) {
     showSetupElement();
-  }
-});
+    setupClose.addEventListener('keydown', onKeyDown);
+    setupClose.addEventListener('click', onClick);
+    setupSubmit.addEventListener('click', onClick);
+    setupSubmit.addEventListener('keydown', onKeyDown);
+    onSetupClose = cb;
+  };
 
-setupClose.addEventListener('click', function () {
-  hideSetupElement();
-});
+})();
 
-setupClose.addEventListener('keydown', function (evt) {
-  if (window.utils.isEnter(evt)) {
-    hideSetupElement();
-  }
-});
+(function () {
+  var setupOpen = document.querySelector('.setup-open-icon');
 
-setupWizardForm.addEventListener('submit', function (evt) {
-  evt.preventDefault();
-});
+  setupOpen.addEventListener('click', function () {
+    window.enableSetup();
+  });
 
-setupSubmit.addEventListener('click', hideSetupElement);
+  var focusOpenButton = function () {
+    setupOpen.focus();
+  };
 
-setupSubmit.addEventListener('keydown', function (evt) {
-  if (window.utils.isEnter(evt)) {
-    hideSetupElement();
-  }
-});
+  var onSetupKeydown = function (evt) {
+    if (window.utils.isEnter(evt)) {
+      window.enableSetup(focusOpenButton);
+    }
+  };
+
+  setupOpen.addEventListener('keydown', onSetupKeydown);
+
+})();
