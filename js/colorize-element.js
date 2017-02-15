@@ -6,7 +6,7 @@ window.colorizeElement = function (element, colors, callback) {
     var newColor = window.utils.getRandomElementExcept(colors, currentColor);
     currentColor = newColor;
     if (typeof callback === 'function') {
-      callback(element2, newColor);
+      callback(element, newColor);
     }
   });
   element.addEventListener('keydown', function (evt) {
@@ -14,7 +14,7 @@ window.colorizeElement = function (element, colors, callback) {
       var newColor = window.utils.getRandomElementExcept(colors, currentColor);
       currentColor = newColor;
       if (typeof callback === 'function') {
-        callback(element2, newColor);
+        callback(element, newColor);
       }
     }
   });
