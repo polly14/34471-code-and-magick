@@ -29,15 +29,15 @@
     '#e6e848'
   ];
 
-  window.colorizeElement(wizardCoat, wizardCoatColors, function (wizardCoat, currentColor) {
+  window.colorizeElement(wizardCoat, wizardCoatColors, function (wizardCoat2, currentColor) {
     wizardCoat.style.fill = currentColor;
   });
 
-  window.colorizeElement(wizardEyes, wizardEyesColors, function (wizardEyes, currentColor) {
+  window.colorizeElement(wizardEyes, wizardEyesColors, function (wizardEyes2, currentColor) {
     wizardEyes.style.fill = currentColor;
   });
 
-  window.colorizeElement(setupFireballWrap, setupFireballWrapColor, function (setupFireballWrap, currentColor) {
+  window.colorizeElement(setupFireballWrap, setupFireballWrapColor, function (setupFireballWrap2, currentColor) {
     setupFireballWrap.style.background = currentColor;
   });
 
