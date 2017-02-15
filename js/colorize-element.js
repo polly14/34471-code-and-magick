@@ -37,6 +37,6 @@ window.colorizeElement = function (element, colors, callback) {
       }
     }
   });
-           
+
 };
 

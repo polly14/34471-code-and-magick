@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  
+
   var wizardCoat = document.querySelector('#wizard-coat');
   var wizardEyes = document.querySelector('#wizard-eyes');
   var setupFireballWrap = document.querySelector('.setup-fireball-wrap');
@@ -29,12 +29,18 @@
     '#e6e848'
   ];
 
-  window.colorizeElement(wizardCoat, wizardCoatColors, function(currentColor) {wizardCoat.style.fill = currentColor;});
+  window.colorizeElement(wizardCoat, wizardCoatColors, function (currentColor) {
+    wizardCoat.style.fill = currentColor;
+  });
 
-  window.colorizeElement(wizardEyes, wizardEyesColors, function(currentColor) {wizardEyes.style.fill = currentColor;});
+  window.colorizeElement(wizardEyes, wizardEyesColors, function (currentColor) {
+    wizardEyes.style.fill = currentColor;
+  });
 
-  window.colorizeElement(setupFireballWrap, setupFireballWrapColor, function(currentColor) {setupFireballWrap.style.background = currentColor;});
-  
+  window.colorizeElement(setupFireballWrap, setupFireballWrapColor, function (currentColor) {
+    setupFireballWrap.style.background = currentColor;
+  });
+
 })();
 
 window.enableSetup = (function () {
@@ -42,7 +48,7 @@ window.enableSetup = (function () {
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
   var setupSubmit = document.querySelector('.setup-submit');
-  var setupWizardForm = document.querySelector('.setup-wizard-form');  
+  var setupWizardForm = document.querySelector('.setup-wizard-form');
   var onSetupKeydown = function (evt) {
     if (window.utils.isEscape(evt)) {
       setup.classList.add('invisible');
