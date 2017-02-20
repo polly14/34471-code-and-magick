@@ -541,9 +541,10 @@ input[type=radio]:checked + .review-mark-label {
 
 .setup {
   width: 800px;
-  height: 600px;
+  height: 750px;
+  
 
-  position: fixed;
+  position: absolute;
   left: 50%;
   top: 100px;
   transform: translateX(-50%);
@@ -619,7 +620,7 @@ input[type=radio]:checked + .review-mark-label {
   height: 250px;
 
   position: absolute;
-  bottom: 150px;
+  bottom: 320px;
   left: 50px;
 
   border-bottom: solid 15px #1cb34d;
@@ -645,7 +646,7 @@ input[type=radio]:checked + .review-mark-label {
 
 .setup-artifacts {
   position: absolute;
-  bottom: 170px;
+  bottom: 340px;
   left: 460px;
 
   display: flex;
@@ -673,7 +674,7 @@ input[type=radio]:checked + .review-mark-label {
 .setup-submit {
   position: absolute;
   left: 50%;
-  bottom: 30px;
+  bottom: 220px;
 
   transform: translateX(-50%);
 
@@ -731,3 +732,25 @@ input[type=radio]:checked + .review-mark-label {
   font-size: 14px;
   color: #ffffff;
 }
+
+.setup-similar {
+  position: absolute;
+  width: 800px;
+  height: 150px;
+  bottom:40px;
+  left:0px;
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;  
+}
+.setup-similar div {
+  width: 20%;
+  padding:0px 20px;
+  box-sizing: border-box;
+}
+
+
+
+
+

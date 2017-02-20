@@ -119,7 +119,6 @@ window.enableSetup = (function () {
       window.enableSetup(focusOpenButton);
     }
   };
-
   setupOpen.addEventListener('keydown', onSetupKeydown);
-
 })();
+
