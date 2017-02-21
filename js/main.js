@@ -23,3 +23,19 @@ window.getFiveRandomArray = function (array) {
 
   });
 })();
+
+window.renderNewFive = function () {
+  var setupSimilar = document.querySelector('.setup-similar');  
+  setTimeout(function () {
+    window.load('https://intensive-javascript-server-dpgtdbwygf.now.sh/code-and-magick/data', function (data) {
+      var wizards = data;
+      setupSimilar.innerHTML = '';
+      var fragment = document.createDocumentFragment();
+      window.getFiveRandomArray(wizards).forEach(function (it) {
+        fragment.appendChild(window.render(it));
+      });
+      setupSimilar.appendChild(fragment);
+    });
+
+  }, 5000);
+};
