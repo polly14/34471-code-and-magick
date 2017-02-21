@@ -25,7 +25,7 @@ window.getFiveRandomArray = function (array) {
 })();
 
 window.renderNewFive = function () {
-  var setupSimilar = document.querySelector('.setup-similar');  
+  var setupSimilar = document.querySelector('.setup-similar');
   setTimeout(function () {
     window.load('https://intensive-javascript-server-dpgtdbwygf.now.sh/code-and-magick/data', function (data) {
       var wizards = data;

@@ -8,7 +8,7 @@
       currentColor = newColor;
       if (typeof callback === 'function') {
         callback(element, newColor);
-      } 
+      }
     };
     element.addEventListener('click', function () {
       colorize();
