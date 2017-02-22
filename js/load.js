@@ -16,7 +16,7 @@ window.load = (function () {
     xhr.addEventListener('load', function (evt) {
       if (evt.target.status >= 400) {
         errorHandler('Failed to load data. Server returned status: ' + evt.target.status);
-      } else if (evt.target.status >= 200) {
+      } else if (evt.target.status === 200) {
         onLoad(evt.target.response);
       }
     });

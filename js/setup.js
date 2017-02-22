@@ -31,15 +31,15 @@
 
   window.colorizeElement(wizardCoat, wizardCoatColors, function (element, currentColor) {
     element.style.fill = currentColor;
-  }, window.renderNewFive);
+  });
 
   window.colorizeElement(wizardEyes, wizardEyesColors, function (element, currentColor) {
     element.style.fill = currentColor;
-  }, window.renderNewFive);
+  });
 
   window.colorizeElement(setupFireballWrap, setupFireballWrapColor, function (element, currentColor) {
     element.style.background = currentColor;
-  }, window.renderNewFive);
+  });
 
 })();
 
