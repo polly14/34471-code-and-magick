@@ -28,7 +28,8 @@ window.utils = (function () {
   return {
     isEnter: isEnter,
     isEscape: isEscape,
-    getRandomElementExcept: getRandomElementExcept
+    getRandomElementExcept: getRandomElementExcept,
+    getRandomElement: getRandomElement
   };
 
 })();
