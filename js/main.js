@@ -1,7 +1,7 @@
 'use strict';
 
-(function () {
-  window.getFiveRandomArray = function (array) {
+window.mainWizards = (function () {
+  var getFiveRandomArray = function (array) {
     var fiveRandomElementArray = [];
     for (var i = 0; i < 5; i++) {
       var rand = window.utils.getRandomElement(array);
@@ -11,25 +11,31 @@
     return fiveRandomElementArray;
   };
 
-  window.loadWizards = function () {
+  var loadWizards = function () {
     window.load('https://intensive-javascript-server-dpgtdbwygf.now.sh/code-and-magick/data', function (data) {
       var wizards = data;
       var setupSimilar = document.querySelector('.setup-similar');
       setupSimilar.innerHTML = '';
       var fragment = document.createDocumentFragment();
-      window.getFiveRandomArray(wizards).forEach(function (it) {
+      getFiveRandomArray(wizards).forEach(function (it) {
         fragment.appendChild(window.render(it));
       });
       setupSimilar.appendChild(fragment);
     });
   };
 
-  window.loadWizards();
-
-  window.renderNewFive = function () {
+  var renderNewFive = function () {
+    clearTimeout(window.timeOutWizards);
     window.timeOutWizards = setTimeout(function () {
-      window.loadWizards();
+      loadWizards();
     }, 5000);
   };
 
+  return {
+    loadWizards: loadWizards,
+    renderNewFive: renderNewFive
+  };
+
 })();
+
+window.mainWizards.loadWizards();

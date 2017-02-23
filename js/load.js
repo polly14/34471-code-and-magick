@@ -14,10 +14,13 @@ window.load = (function () {
     }
 
     xhr.addEventListener('load', function (evt) {
-      if (evt.target.status >= 400) {
+      if (xhr.readyState === 4) {
         errorHandler('Failed to load data. Server returned status: ' + evt.target.status);
-      } else if (evt.target.status === 200) {
-        onLoad(evt.target.response);
+        if (xhr.status === 200) {
+          onLoad(evt.target.response);
+        } else {
+          errorHandler('Failed to load data. Server returned status: ' + evt.target.status);
+        }
       }
     });
 
@@ -30,4 +33,3 @@ window.load = (function () {
     xhr.send();
   };
 })();
-
