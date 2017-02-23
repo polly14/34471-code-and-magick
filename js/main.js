@@ -30,10 +30,10 @@ window.mainWizards = (function () {
       loadWizards();
     }, 5000);
   };
-  
+
   loadWizards();
 
-  return {    
+  return {
     renderNewFive: renderNewFive
   };
 
