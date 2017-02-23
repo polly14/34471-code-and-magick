@@ -23,19 +23,19 @@ window.mainWizards = (function () {
       setupSimilar.appendChild(fragment);
     });
   };
-
+  var timeOutWizards;
   var renderNewFive = function () {
-    clearTimeout(window.timeOutWizards);
-    window.timeOutWizards = setTimeout(function () {
+    clearTimeout(timeOutWizards);
+    timeOutWizards = setTimeout(function () {
       loadWizards();
     }, 5000);
   };
+  
+  loadWizards();
 
-  return {
-    loadWizards: loadWizards,
+  return {    
     renderNewFive: renderNewFive
   };
 
 })();
 
-window.mainWizards.loadWizards();
